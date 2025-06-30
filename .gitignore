@@ -1,3 +1,7 @@
+#VS CONFIG FILES
 .vs/
 bin/
 obj/
+
+#EXTENSIONS
+.qodo
