@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Installer
 {
-    internal class Program
+    internal class App
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
