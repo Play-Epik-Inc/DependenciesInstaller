@@ -27,7 +27,8 @@ namespace Installer
 
             try
             {
-                //STARTING .BAT INSTALLER
+                Console.WriteLine($"{DateTime.Now}: Starting the .bat installer...");
+                //NOTE: STARTING .BAT INSTALLER
                 if (!File.Exists(savedDataPath)) //NOTE: CHECK IF IS ALREADY INSTALLED
                 {
                     ProcessStartInfo psi = new ProcessStartInfo();
@@ -35,17 +36,15 @@ namespace Installer
                     psi.Verb = "runas";
                     psi.UseShellExecute = true;
 
-                    using (Process p = Process.Start(psi))
-                    {
-                        p.WaitForExit();
-                    }
-
+                    using (Process p = Process.Start(psi)) {p.WaitForExit();}
                     File.WriteAllText(savedDataPath, $"Installation complete: {DateTime.Now}, DO NOT DELETE THIS FILE.");
                 }
 
-                //STARTING THE GAME
+                //NOTE: STARTING THE GAME
+                Console.WriteLine($"{DateTime.Now}: Starting the .exe program...");
                 Process.Start(exePath);
 
+                Console.WriteLine($"{DateTime.Now}: Everything completed with success!");
                 Environment.Exit(0);
             }
             catch (Exception ex)
