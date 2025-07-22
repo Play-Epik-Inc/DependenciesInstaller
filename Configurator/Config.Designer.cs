@@ -29,7 +29,6 @@ namespace Configurator
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Config));
             this.labelStart = new System.Windows.Forms.Label();
             this.gameFolder = new System.Windows.Forms.Label();
@@ -39,9 +38,8 @@ namespace Configurator
             this.infoLabel = new System.Windows.Forms.Label();
             this.buildButton = new System.Windows.Forms.Button();
             this.buildLogs = new System.Windows.Forms.Label();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.executeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelStart
@@ -71,9 +69,9 @@ namespace Configurator
             this.buttonChangeFolder.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.buttonChangeFolder.Font = new System.Drawing.Font("Clash Display Medium", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonChangeFolder.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonChangeFolder.Location = new System.Drawing.Point(638, 77);
+            this.buttonChangeFolder.Location = new System.Drawing.Point(627, 77);
             this.buttonChangeFolder.Name = "buttonChangeFolder";
-            this.buttonChangeFolder.Size = new System.Drawing.Size(135, 31);
+            this.buttonChangeFolder.Size = new System.Drawing.Size(146, 31);
             this.buttonChangeFolder.TabIndex = 2;
             this.buttonChangeFolder.Text = "Change";
             this.buttonChangeFolder.UseMnemonic = false;
@@ -130,10 +128,6 @@ namespace Configurator
             this.buildLogs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.buildLogs.Visible = false;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // progressBar
             // 
             this.progressBar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -146,11 +140,27 @@ namespace Configurator
             this.progressBar.Value = 20;
             this.progressBar.Visible = false;
             // 
+            // executeButton
+            // 
+            this.executeButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.executeButton.Font = new System.Drawing.Font("Clash Display Medium", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.executeButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.executeButton.Location = new System.Drawing.Point(317, 246);
+            this.executeButton.Name = "executeButton";
+            this.executeButton.Size = new System.Drawing.Size(149, 35);
+            this.executeButton.TabIndex = 8;
+            this.executeButton.Text = "Execute";
+            this.executeButton.UseMnemonic = false;
+            this.executeButton.UseVisualStyleBackColor = false;
+            this.executeButton.Visible = false;
+            this.executeButton.Click += new System.EventHandler(this.executeButton_Click);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.executeButton);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buildLogs);
             this.Controls.Add(this.buildButton);
@@ -164,7 +174,6 @@ namespace Configurator
             this.Name = "Config";
             this.Text = "Configurator";
             this.Load += new System.EventHandler(this.Config_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,13 +208,18 @@ namespace Configurator
         //Start build the app
         private void StartBuilding()
         {
-            Program.BuildApplication(selectedPath, buildLogs, errorProvider, progressBar, buildButton);
+            Program.BuildApplication(selectedPath, buildLogs, progressBar, buildButton, executeButton);
+        }
+
+        private void ExecuteProgram()
+        {
+            Program.Execute(selectedPath);
         }
 
         private Label infoLabel;
         private Button buildButton;
         private Label buildLogs;
-        private ErrorProvider errorProvider;
         private ProgressBar progressBar;
+        private Button executeButton;
     }
 }

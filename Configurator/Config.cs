@@ -22,14 +22,13 @@ namespace Configurator
             Console.WriteLine($"{DateTime.Now}: Loading config files");
         }
 
-        private void buttonChangeFolder_Click(object sender, EventArgs e)
-        {
-            OpenFolderBrowser();
-        }
+        private void buttonChangeFolder_Click(object sender, EventArgs e) {OpenFolderBrowser();}
 
-        private void buildButton_Click(object sender, EventArgs e)
+        private void buildButton_Click(object sender, EventArgs e) {StartBuilding();}
+
+        private void executeButton_Click(object sender, EventArgs e)
         {
-            StartBuilding();
+            ExecuteProgram();
         }
     }
 }

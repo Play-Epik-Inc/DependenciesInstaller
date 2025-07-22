@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using Configurator.Exceptions;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,7 +21,7 @@ namespace Configurator
             Application.Run(new Config());
         }
 
-        public static void BuildApplication(string path, Label buildLogs, ErrorProvider errorDialog, ProgressBar progressBar, Button baseButton)
+        public static async Task BuildApplication(string path, Label buildLogs, ProgressBar progressBar, Button baseButton, Button executeButton)
         {
             //Variables
             string baseFolderPath, gamePath;
@@ -30,8 +30,7 @@ namespace Configurator
             //Setting-up the UI
             buildLogs.Visible = true;
             progressBar.Visible = true;
-            baseButton.Enabled = false;
-            baseButton.Cursor = Cursors.WaitCursor;
+            baseButton.Visible = false;
 
             //Control if path == null
             if (path == null || path.Trim() == "")
@@ -47,15 +46,15 @@ namespace Configurator
                 buildLogs.Text = $"{GetCurrentDate()}: Starting building Installer.exe...";
                 progressBar.Value = 20;
 
-                Thread.Sleep(3000);
-                
+                await Task.Delay(2500);
+
                 //Get base directory path
                 baseFolderPath = Path.GetDirectoryName(path);
                 buildLogs.Text = $"{GetCurrentDate()}: Finding base Path...";
                 Console.WriteLine(GetCurrentDate() + ": Base Folder: " + baseFolderPath);
                 progressBar.Value = 40;
 
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
 
                 //Create "Game" folder into that
                 gamePath = Path.Combine(path, "Game");
@@ -67,7 +66,7 @@ namespace Configurator
                 buildLogs.Text = $"{GetCurrentDate()}: Creating Game folder...";
                 progressBar.Value = 50;
 
-                Thread.Sleep(1500);
+                await Task.Delay(1500);
 
                 //Copy game_files into the new "Game" folder
                 int availableFiles = Directory.GetFiles(path).Length, currentCopied = 0;
@@ -98,17 +97,13 @@ namespace Configurator
                     try {File.Move(fileToMove, dstFile);}
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occured during the build and now is canceled, Error: {ex}", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        buildLogs.ForeColor = Color.Red;
-                        buildLogs.AutoEllipsis = true;
-                        buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: {ex}";
-                        ResetUI(buildLogs, progressBar);
-                        break;
+                        await ResetUI(buildLogs, progressBar, executeButton, baseButton);
+                        throw new BuildFailedException(buildLogs, ex);
                     }
                 }
                 progressBar.Value = 60;
 
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
 
                 //Move sub_folders also
                 int currentlyMoved = 0;
@@ -133,17 +128,14 @@ namespace Configurator
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"An error occurred during the build and now is canceled, ERROR: '{folderName}': {ex.Message}", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            buildLogs.ForeColor = Color.Red;
-                            buildLogs.Text = $"{GetCurrentDate()}: FOLDER MOVE FAILED, Error: {ex.Message}";
-                            ResetUI(buildLogs, progressBar);
-                            break;
+                            await ResetUI(buildLogs, progressBar, executeButton, baseButton);
+                            throw new BuildFailedException(buildLogs, ex);
                         }
                     }
                 }
                 progressBar.Value = 70;
 
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
 
                 //Get Installer.exe and installing it.
                 string applicationDirectory = Directory.GetCurrentDirectory();
@@ -156,26 +148,20 @@ namespace Configurator
                 {
                     if (File.Exists(destinationPath))
                     {
-                        MessageBox.Show($"An error occured during the build and now is canceled, Error: Installer.exe already exists.", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        buildLogs.ForeColor = Color.Red;
-                        buildLogs.AutoEllipsis = true;
-                        buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: Installer.exe already exists.";
-                        ResetUI(buildLogs, progressBar);
+                        await ResetUI(buildLogs, progressBar, executeButton, baseButton);
+                        throw new BuildFailedException(buildLogs, null);
                     }
                     else
                         File.Copy(exePersistentDirectory, destinationPath);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occured during the build and now is canceled, Error: {ex}", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    buildLogs.ForeColor = Color.Red;
-                    buildLogs.AutoEllipsis = true;
-                    buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: {ex}";
-                    ResetUI(buildLogs, progressBar);
+                    await ResetUI(buildLogs, progressBar, executeButton, baseButton);
+                    throw new BuildFailedException(buildLogs, ex);
                 }
                 progressBar.Value = 80;
 
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
 
                 //Install Install_EasyAntiCheat.bat into Game folder
                 string batPersistentDirectory = Path.Combine(applicationDirectory, "Install_EasyAntiCheat.bat");
@@ -189,22 +175,19 @@ namespace Configurator
                         buildLogs.ForeColor = Color.Red;
                         buildLogs.AutoEllipsis = true;
                         buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: Installer.exe already exists.";
-                        ResetUI(buildLogs, progressBar);
+                        await ResetUI(buildLogs, progressBar, executeButton, baseButton);
                     }
                     else 
                         File.Copy(batPersistentDirectory, Path.Combine(gamePath, "Install_EasyAntiCheat.bat"));
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occured during the build and now is canceled, Error: {ex}", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    buildLogs.ForeColor = Color.Red;
-                    buildLogs.AutoEllipsis = true;
-                    buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: {ex}";
-                    ResetUI(buildLogs, progressBar);
+                    await ResetUI(buildLogs, progressBar, executeButton, baseButton);
+                    throw new BuildFailedException(buildLogs, ex);
                 }
                 progressBar.Value = 90;
 
-                Thread.Sleep(2000);
+                await Task.Delay(1000);
 
                 //Build completed.
                 timeEnded = DateTime.Now;
@@ -212,31 +195,51 @@ namespace Configurator
                 string timeElapsedMinutes = (timeEnded - timeStarted).Minutes.ToString();
                 string timeElapsedSeconds;
 
-                //Format output
-                if ((timeEnded - timeStarted).Seconds < 10)
-                    timeElapsedSeconds = $"0{(timeEnded - timeStarted).Seconds.ToString()}";
-                else
-                    timeElapsedSeconds = (timeEnded - timeStarted).Seconds.ToString();
+                //Format output for Seconds
+                timeElapsedSeconds = ((timeEnded - timeStarted).Seconds < 10) ? $"0{(timeEnded - timeStarted).Seconds.ToString()}" : (timeEnded - timeStarted).Seconds.ToString();
 
                 //Setting-up the UI
                 progressBar.Value = 100;
-                baseButton.Cursor = Cursors.Default;
-                baseButton.Enabled = true;
                 buildLogs.ForeColor = Color.Green;
+                executeButton.Visible = true;
                 buildLogs.Text = $"{GetCurrentDate()}: BUILD SUCCEDED! (Time elapsed: {timeElapsedMinutes}:{timeElapsedSeconds})";
 
                 //Reset UI
-                ResetUI(buildLogs, progressBar);
+                await ResetUI(buildLogs, progressBar, executeButton, baseButton);
             }
         }
 
-        public static async void ResetUI(Label logs, ProgressBar bar)
+        public static void Execute(string path)
+        {
+            //Get executable path from base path.
+            string executablePath = Path.Combine(path, "Installer.exe");
+
+            try
+            {
+                //Create the ProcessStartInfo element with UseShellExecute set to false, however this doesn't work.
+                var psi = new ProcessStartInfo
+                {
+                    FileName = executablePath,
+                    UseShellExecute = false
+                };
+
+                Process.Start(psi); //Start the Process
+            }
+            catch (Win32Exception ex)
+            {
+                //Catch the Win32Exception for non-base privilegies of Configurator App.
+                throw new ExecuteFailedException(ex);
+            }
+        }
+
+        public static async Task ResetUI(Label logs, ProgressBar bar, Button executeButton, Button buildButton)
         {
             await Task.Delay(5000);
             logs.Visible = false;
             bar.Visible = false;
+            executeButton.Visible = false;
+            buildButton.Visible = true;
         }
-
         public static string GetCurrentDate() {return $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";}
     }
 }
