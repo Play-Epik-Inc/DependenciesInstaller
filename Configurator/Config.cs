@@ -12,23 +12,12 @@ namespace Configurator
 {
     public partial class Config : Form
     {
-        public Config()
-        {
-            InitializeComponent();
-        }
+        //Event listeners
 
-        private void Config_Load(object sender, EventArgs e)
-        {
-            Console.WriteLine($"{DateTime.Now}: Loading config files");
-        }
-
+        public Config() {InitializeComponent();}
+        private void Config_Load(object sender, EventArgs e) {Console.WriteLine($"{DateTime.Now}: Loading config files");}
         private void buttonChangeFolder_Click(object sender, EventArgs e) {OpenFolderBrowser();}
-
         private void buildButton_Click(object sender, EventArgs e) {StartBuilding();}
-
-        private void executeButton_Click(object sender, EventArgs e)
-        {
-            ExecuteProgram();
-        }
+        private void executeButton_Click(object sender, EventArgs e) {ExecuteProgram();}
     }
 }

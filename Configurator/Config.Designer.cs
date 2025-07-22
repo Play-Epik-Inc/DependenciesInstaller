@@ -206,15 +206,9 @@ namespace Configurator
         }
 
         //Start build the app
-        private void StartBuilding()
-        {
-            Program.BuildApplication(selectedPath, buildLogs, progressBar, buildButton, executeButton);
-        }
+        private async void StartBuilding() {await Program.BuildApplication(selectedPath, buildLogs, progressBar, buildButton, executeButton);}
 
-        private void ExecuteProgram()
-        {
-            Program.Execute(selectedPath);
-        }
+        private void ExecuteProgram() {Program.Execute(selectedPath);}
 
         private Label infoLabel;
         private Button buildButton;
