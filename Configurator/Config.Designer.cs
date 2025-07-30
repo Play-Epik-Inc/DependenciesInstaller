@@ -96,7 +96,7 @@ namespace Configurator
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(799, 42);
             this.infoLabel.TabIndex = 4;
-            this.infoLabel.Text = "Warning! This version uses the  \"886796dcf0f723\" version of Easy \r\nAnti-Cheat, pl" +
+            this.infoLabel.Text = "Warning! This version uses the  \"ffd2a4e23f75a7\" version of Easy \r\nAnti-Cheat, pl" +
     "ease activate this build before publish this version.";
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
