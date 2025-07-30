@@ -15,12 +15,4 @@ Dependecies Installer is a program that allows you to install the necessary comp
 
 # **How to Setup Dependecies-Installer**
 
-To perform a correct and clean setup of DependeciesInstaller, follow these 4 steps:
-
-1. **Put all your Gamefile in a folder WITH THIS NAME: "Game"**, it's important that name however the program doesn't work.
-
-2. **Download from the *Presets* folder the file *Install_EasyAntiCheat.bat* file (DON'T CHANGE THE NAME!) and put the file *INTO* the "Game" folder**
-
-3. **Insert *OUTSIDE* the "Game" folder the executable file "Installer.exe"**.
-
-4. Your game is succesfully setted-up with **DEPENDECIES INSTALLER!**, now you have to launch the *Installer.exe* file and if it is a problem with that, re-do all of this steps
+To perform a correct and clean setup of DependeciesInstaller, just open the **Configurator** app and choose the game folder for apply this tweak!
