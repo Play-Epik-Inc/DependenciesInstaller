@@ -28,8 +28,8 @@ namespace Installer
             try
             {
                 Console.WriteLine($"{DateTime.Now}: Starting the .bat installer...");
-                //NOTE: STARTING .BAT INSTALLER
-                if (!File.Exists(savedDataPath)) //NOTE: CHECK IF IS ALREADY INSTALLED
+                //STARTING .BAT INSTALLER
+                if (!File.Exists(savedDataPath))
                 {
                     ProcessStartInfo psi = new ProcessStartInfo();
                     psi.FileName = batPath;
@@ -40,7 +40,7 @@ namespace Installer
                     File.WriteAllText(savedDataPath, $"Installation complete: {DateTime.Now}, DO NOT DELETE THIS FILE.");
                 }
 
-                //NOTE: STARTING THE GAME
+                //STARTING THE GAME
                 Console.WriteLine($"{DateTime.Now}: Starting the .exe program...");
                 Process.Start(exePath);
 
