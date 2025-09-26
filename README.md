@@ -1,18 +1,18 @@
-# <img src="src/icon.png" alt="Icon" width="30px" height="30px"> **Dependecies Installer**
+# <img src="src/icon.png" alt="Icon" width="30px" height="30px"> **Dependencies Installer**
 
 ![GitHub release](https://img.shields.io/github/v/release/Play-Epik-Inc/DependeciesInstaller?color=009dff) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Play-Epik-Inc/DependeciesInstaller/blob/main/LICENSE)
 
-An Easy Anti-Cheat integration sofware.
+An easy-to-use software for integrating anti-cheat measures.
 
 # **Summary**
 
-[❔ What DependeciesInstaller do](#what-dependecies-installer-do)
+[❔ What Dependencies Installer do](#what-dependencies-installer-do)
 
-[🚀 How to Setup Dependecies Installer](#how-to-setup-dependecies-installer)
+[🚀 How to Setup Dependencies Installer](#how-to-setup-dependencies-installer)
 
-# **What Dependecies Installer do?**
-Dependecies Installer is a program that allows you to install the necessary components (via a .bat file that you can find in the **presets** folder) to run your game with AntiCheat without any problems for the user of the following: *‘Easy Anti-Cheat not installed ’*, *"Error when opening Easy Anti-Cheat* etc..
+# **What Dependencies Installer do?**
+Dependencies Installer is a program that allows you to install the necessary components (via a .bat file that you can find in the **presets** folder) to run your game with AntiCheat without any problems for the user of the following: *‘Easy Anti-Cheat not installed ’*, *"Error when opening Easy Anti-Cheat* etc..
 
-# **How to Setup Dependecies-Installer**
+# **How to Setup Dependencies-Installer**
 
-To perform a correct and clean setup of DependeciesInstaller, just open the **Configurator** app and choose the game folder for apply this tweak!
+To perform a correct and clean setup of Dependencies Installer, just open the **Configurator** app and choose the game folder to apply this tweak!
