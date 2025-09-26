@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -62,7 +61,7 @@ namespace Configurator
                 if (!Directory.Exists(gamePath))
                     Directory.CreateDirectory(gamePath);
                 else
-                    MessageBox.Show($"A folder with the name of \"Game\" already exist, the program will copy files into that folder.", "Build Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"A folder with the name of \"Game\" already exists, the program will copy files into that folder.", "Build Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 buildLogs.Text = $"{GetCurrentDate()}: Creating Game folder...";
                 progressBar.Value = 50;
 
@@ -171,7 +170,7 @@ namespace Configurator
                 {
                     if (File.Exists(Path.Combine(gamePath, "Install_EasyAntiCheat.bat")))
                     {
-                        MessageBox.Show($"An error occured during the build and now is canceled, Error: Installer.exe already exists.", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"An error occurred during the build and now is canceled, Error: Installer.exe already exists.", "Build Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         buildLogs.ForeColor = Color.Red;
                         buildLogs.AutoEllipsis = true;
                         buildLogs.Text = $"{GetCurrentDate()}: BUILD FAILED, Error: Installer.exe already exists.";
@@ -202,7 +201,7 @@ namespace Configurator
                 progressBar.Value = 100;
                 buildLogs.ForeColor = Color.Green;
                 executeButton.Visible = true;
-                buildLogs.Text = $"{GetCurrentDate()}: BUILD SUCCEDED! (Time elapsed: {timeElapsedMinutes}:{timeElapsedSeconds})";
+                buildLogs.Text = $"{GetCurrentDate()}: BUILD SUCCEEDED! (Time elapsed: {timeElapsedMinutes}:{timeElapsedSeconds})";
 
                 //Reset UI
                 await ResetUI(buildLogs, progressBar, executeButton, baseButton);
