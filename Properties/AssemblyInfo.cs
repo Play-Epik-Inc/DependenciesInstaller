@@ -2,11 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("DependeciesInstaller")]
+[assembly: AssemblyTitle("DependenciesInstaller")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Play Epik, Incorporation")]
-[assembly: AssemblyProduct("DependeciesInstaller")]
+[assembly: AssemblyProduct("DependenciesInstaller")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -16,5 +16,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("bef407e2-6cda-416b-a7e1-10b20ed814ba")]
 
-[assembly: AssemblyVersion("2.0.1.0")]
-[assembly: AssemblyFileVersion("2.0.1.0")]
+[assembly: AssemblyVersion("2.0.1.2")]
+[assembly: AssemblyFileVersion("2.0.1.2")]

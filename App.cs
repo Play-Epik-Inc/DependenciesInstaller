@@ -27,7 +27,7 @@ namespace Installer
 
             try
             {
-                Console.WriteLine($"{DateTime.Now}: Starting the .bat installer...");
+                Console.WriteLine($"{DateTime.Now}: Starting the .bat installer with admin privileges...");
                 //STARTING .BAT INSTALLER
                 if (!File.Exists(savedDataPath))
                 {
@@ -44,12 +44,12 @@ namespace Installer
                 Console.WriteLine($"{DateTime.Now}: Starting the .exe program...");
                 Process.Start(exePath);
 
-                Console.WriteLine($"{DateTime.Now}: Everything completed with success!");
+                Console.WriteLine($"{DateTime.Now}: Everything completed successfully!");
                 Environment.Exit(0);
             }
             catch (Exception ex)
             {
-                MessageBox(IntPtr.Zero, $"Fatal error: an unknown error occured during the execution of the game, error code: {ex.Message}", "Fatal Error", 0x00000010);
+                MessageBox(IntPtr.Zero, $"Fatal error: an unknown error occurred during the execution of the game, error code: {ex.Message}", "Fatal Error", 0x00000010);
                 Environment.Exit(0);
             }
         }
