@@ -37,11 +37,8 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Build Installer
-        run: dotnet build Installer.sln
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+      - name: Building Configurator
+        run: dotnet build Configurator/Configurator.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
