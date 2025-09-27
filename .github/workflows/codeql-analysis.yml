@@ -40,9 +40,6 @@ jobs:
       - name: Build Installer
         run: dotnet build Installer.sln
 
-      - name: Build Configurator solution
-        run: dotnet build Configurator/Configurator.sln -c Debug -p:Platform="Any CPU"
-
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
