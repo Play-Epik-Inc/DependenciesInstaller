@@ -31,9 +31,9 @@ jobs:
           languages: ${{ matrix.language }}
           queries: +security-and-quality
           config-file: ./.github/codeql/codeql-config.yml
-          
+
       - name: Building Configurator
-        run: msbuild Configurator/Configurator.sln
+        run: dotnet msbuild Configurator/Configurator.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
