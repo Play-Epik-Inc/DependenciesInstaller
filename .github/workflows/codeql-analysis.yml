@@ -37,9 +37,6 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Build Installer
-        run: dotnet build Installer.sln
-
       - name: Build Configurator
         run: dotnet build Configurator/Configurator.sln
 
