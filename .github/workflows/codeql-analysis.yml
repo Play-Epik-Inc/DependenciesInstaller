@@ -41,7 +41,7 @@ jobs:
         run: dotnet build Installer.sln
 
       - name: Build Configurator
-        run: cd Configurator && dotnet build Configurator.sln
+        run: cd Configurator && dotnet build -p:Platform=x64
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
