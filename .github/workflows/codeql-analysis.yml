@@ -32,8 +32,12 @@ jobs:
           queries: +security-and-quality
           config-file: ./.github/codeql/codeql-config.yml
 
-      - name: Building Configurator
-        run: dotnet msbuild Configurator/Configurator.sln
+      - name: Build Configurator
+        run: |
+          "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe > msbuild.txt
+          set /p MSBUILD=<msbuild.txt
+          "%MSBUILD%" Configurator/Configurator.sln /p:Configuration=Debug /p:Platform="Any CPU"
+        shell: cmd
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
