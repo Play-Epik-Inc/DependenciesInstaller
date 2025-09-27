@@ -38,7 +38,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Building Configurator
-        run: dotnet build Configurator/Configurator.sln
+        run: msbuild Configurator/Configurator.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
