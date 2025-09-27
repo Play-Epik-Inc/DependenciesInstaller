@@ -31,12 +31,7 @@ jobs:
           languages: ${{ matrix.language }}
           queries: +security-and-quality
           config-file: ./.github/codeql/codeql-config.yml
-      
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '4.8.x'
-
+          
       - name: Building Configurator
         run: msbuild Configurator/Configurator.sln
 
