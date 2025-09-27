@@ -195,7 +195,7 @@ namespace Configurator
                 string timeElapsedSeconds;
 
                 //Format output for Seconds
-                timeElapsedSeconds = ((timeEnded - timeStarted).Seconds < 10) ? $"0{(timeEnded - timeStarted).Seconds.ToString()}" : (timeEnded - timeStarted).Seconds.ToString();
+                timeElapsedSeconds = ((timeEnded - timeStarted).Seconds < 10) ? $"0{(timeEnded - timeStarted).Seconds}" : (timeEnded - timeStarted).Seconds.ToString();
 
                 //Setting-up the UI
                 progressBar.Value = 100;

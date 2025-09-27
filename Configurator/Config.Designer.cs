@@ -6,8 +6,8 @@ namespace Configurator
 {
     partial class Config
     {
-        //variables
-        public static string selectedPath = null;
+        //Variables
+        public string selectedPath = null;
 
         /// <summary>
         /// Variabile di progettazione necessaria.
