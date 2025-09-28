@@ -8,22 +8,16 @@
 			</requestedPrivileges>
 		</security>
 	</trustInfo>
-
-	<!-- dichiarazione DPI‑Awareness e longPathAware -->
 	<application xmlns="urn:schemas-microsoft-com:asm.v3">
 		<windowsSettings>
-			<!-- Imposta la tua app a DPI‑Aware Per‑Monitor V2 -->
 			<dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">
 				PerMonitorV2
 			</dpiAwareness>
-			<!-- Opzionale: gestisce percorsi lunghi (>260) -->
 			<longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">
 				true
 			</longPathAware>
 		</windowsSettings>
 	</application>
-
-	<!-- temi e controlli comuni v6 -->
 	<dependency>
 		<dependentAssembly>
 			<assemblyIdentity
@@ -38,7 +32,6 @@
 
 	<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
 		<application>
-			<!-- sblocca automaticamente l’ambiente più compatibile per Windows 10/11 -->
 			<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
 		</application>
 	</compatibility>
